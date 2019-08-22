@@ -20,5 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('v1')->group( function () {
     Route::get('/users', 'Api\UserController@index');
     Route::get('/user/{id}', 'Api\UserController@show');
-    Route::get('/user/?filter[type]={type}', 'Api\UserController@search');
+    
+    Route::get('/user/', 'Api\UserController@search');
 });

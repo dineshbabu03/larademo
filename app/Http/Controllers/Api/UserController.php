@@ -46,9 +46,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $user = User::findOrFail($id);
+      $user = QueryBuilder::for(User::class)
+        ->allowedFilters('name','type')
+        ->get();
 
         return $user;
     }
@@ -87,12 +89,12 @@ class UserController extends Controller
         //
     }
 
-    public function search($s)
+    public function search()
     {
       $user = QueryBuilder::for(User::class)
-        ->allowedFilters($s)
+        ->allowedFilters('name', 'type')
         ->get();
 
-      // return $user;
+      return $user;
     }
 }
